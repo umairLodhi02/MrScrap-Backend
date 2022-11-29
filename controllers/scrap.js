@@ -40,8 +40,7 @@ module.exports = {
     }
   },
   addScrap: async function (req, res) {
-    const { scrap } = req.body;
-    const { error } = validateAddScrap(scrap);
+    const { error } = validateAddScrap(req.body);
     if (error) {
       res.status(401).send({
         success: false,
@@ -49,10 +48,17 @@ module.exports = {
         data: {},
       });
     } else {
+      const { scrap } = req.body;
+
       const newScrap = await Scrap.create({
+        description: scrap.description,
         type: scrap.type,
         quantity: scrap.quantity,
         userId: req.userId,
+        location: {
+          latitude: scrap.location.latitude,
+          longitude: scrap.location.longitude,
+        },
       });
 
       if (newScrap) {
@@ -76,8 +82,7 @@ module.exports = {
   updateScrap: async function (req, res) {
     const currentScrap = req.scrap;
 
-    const { scrap } = req.body;
-    const { error } = validateUpdateScrap(scrap);
+    const { error } = validateUpdateScrap(req.body);
     if (error) {
       res.status(401).send({
         success: false,
@@ -85,10 +90,17 @@ module.exports = {
         data: {},
       });
     } else {
+      const { scrap } = req.body;
+
+      currentScrap.description = scrap.description
+        ? scrap.description
+        : currentScrap.description;
       currentScrap.type = scrap.type ? scrap.type : currentScrap.type;
       currentScrap.quantity = scrap.quantity
         ? scrap.quantity
         : currentScrap.quantity;
+      currentScrap.location.latitude = scrap.location.latitude;
+      currentScrap.location.longitude = scrap.location.longitude;
 
       const updatedScrap = await currentScrap.save();
 

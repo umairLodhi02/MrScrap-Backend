@@ -32,6 +32,7 @@ const verifyToken = async (req, res, next) => {
         }
       }
     } catch (err) {
+      console.log(err);
       return res
         .status(401)
         .send({ success: false, message: "Invalid Token", code: 401 });
