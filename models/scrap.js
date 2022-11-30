@@ -10,10 +10,7 @@ const scrapSchema = new mongoose.Schema(
       type: Number,
       default: "",
     },
-    type: {
-      type: String,
-      default: "",
-    },
+
     status: {
       type: String,
       default: "",
@@ -22,9 +19,13 @@ const scrapSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    location: {
-      latitude: 0.0,
-      longitude: 0.0,
+    address: {
+      type: String,
+      default: "",
+    },
+    category: {
+      type: String,
+      default: 0,
     },
   },
   { timestamps: true }
@@ -37,11 +38,8 @@ function validateAddScrap(body) {
     scrap: Joi.object({
       description: Joi.string().required(),
       quantity: Joi.number().required(),
-      type: Joi.string().required(),
-      location: Joi.object({
-        latitude: Joi.number().required(),
-        longitude: Joi.number().required(),
-      }).required(),
+      address: Joi.string().required(),
+      category: Joi.string().required(),
     }).required(),
   });
 
@@ -52,11 +50,8 @@ function validateUpdateScrap(body) {
     scrap: Joi.object({
       description: Joi.string().required(),
       quantity: Joi.number(),
-      type: Joi.string(),
-      location: Joi.object({
-        latitude: Joi.number(),
-        longitude: Joi.number(),
-      }),
+      address: Joi.string().required(),
+      category: Joi.string(),
     }),
   }).required();
 

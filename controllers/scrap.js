@@ -52,13 +52,10 @@ module.exports = {
 
       const newScrap = await Scrap.create({
         description: scrap.description,
-        type: scrap.type,
         quantity: scrap.quantity,
         userId: req.userId,
-        location: {
-          latitude: scrap.location.latitude,
-          longitude: scrap.location.longitude,
-        },
+        address: scrap.address,
+        category: scrap.category,
       });
 
       if (newScrap) {
@@ -95,13 +92,16 @@ module.exports = {
       currentScrap.description = scrap.description
         ? scrap.description
         : currentScrap.description;
-      currentScrap.type = scrap.type ? scrap.type : currentScrap.type;
       currentScrap.quantity = scrap.quantity
         ? scrap.quantity
         : currentScrap.quantity;
-      currentScrap.location.latitude = scrap.location.latitude;
-      currentScrap.location.longitude = scrap.location.longitude;
 
+      currentScrap.address = scrap.address
+        ? scrap.address
+        : currentScrap.address;
+      currentScrap.category = scrap.category
+        ? scrap.category
+        : currentScrap.category;
       const updatedScrap = await currentScrap.save();
 
       res.status(200).send({
