@@ -27,6 +27,10 @@ const scrapSchema = new mongoose.Schema(
       type: String,
       default: 0,
     },
+    price: {
+      type: Number,
+      defautl: 0,
+    },
   },
   { timestamps: true }
 );
@@ -38,6 +42,7 @@ function validateAddScrap(body) {
     scrap: Joi.object({
       description: Joi.string().required(),
       quantity: Joi.number().required(),
+      price: Joi.number().required(),
       address: Joi.string().required(),
       category: Joi.string().required(),
     }).required(),
@@ -50,6 +55,7 @@ function validateUpdateScrap(body) {
     scrap: Joi.object({
       description: Joi.string().required(),
       quantity: Joi.number(),
+      price: Joi.number(),
       address: Joi.string().required(),
       category: Joi.string(),
     }),

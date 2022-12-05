@@ -56,6 +56,7 @@ module.exports = {
         userId: req.userId,
         address: scrap.address,
         category: scrap.category,
+        price: scrap.price,
       });
 
       if (newScrap) {
@@ -102,6 +103,9 @@ module.exports = {
       currentScrap.category = scrap.category
         ? scrap.category
         : currentScrap.category;
+
+      currentScrap.price = scrap.price ? scrap.price : currentScrap.price;
+
       const updatedScrap = await currentScrap.save();
 
       res.status(200).send({
