@@ -1,7 +1,12 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
-const feedbackSchema = new mongoose.Schema({
-  text: {
+
+const complainSchema = new mongoose.Schema({
+  subject: {
+    type: String,
+    default: "",
+  },
+  description: {
     type: String,
     default: "",
   },
@@ -11,14 +16,15 @@ const feedbackSchema = new mongoose.Schema({
   },
 });
 
-const Feedback = mongoose.model("Feedback", feedbackSchema);
+const Complain = mongoose.model("Complains", complainSchema);
 
-function validateFeedback(body) {
+function validateComplains(body) {
   let schema = Joi.object({
-    text: Joi.string().required(),
+    description: Joi.string().required(),
+    subject: Joi.string().required(),
   });
 
   return schema.validate(body);
 }
 
-module.exports = { Feedback, validateFeedback };
+module.exports = { Complain, validateComplains };
