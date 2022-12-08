@@ -63,8 +63,8 @@ module.exports = {
 
   login: async function (req, res) {
     const { user, loginType } = req.body;
+    console.log(user, loginType);
     const { error } = validateLoginType({ loginType });
-
     if (error) {
       res
         .status(409)
@@ -161,7 +161,7 @@ module.exports = {
                 profileImgUrl: currentUser.profileImgUrl,
                 contactNo: contactNo,
               },
-              process.env.TOKEN_KEY,
+              TOKEN_KEY,
               { expiresIn: 60000 }
             );
             currentUser.token = token;
