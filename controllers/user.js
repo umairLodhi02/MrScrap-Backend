@@ -122,6 +122,7 @@ module.exports = {
                   email: currentUser.email,
                   profileImgUrl: currentUser.profileImgUrl,
                   contactNo: currentUser.contactNo,
+                  isAdmin: currentUser.isAdmin,
                 },
               },
             });
