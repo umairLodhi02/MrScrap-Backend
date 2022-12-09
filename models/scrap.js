@@ -10,10 +10,9 @@ const scrapSchema = new mongoose.Schema(
       type: Number,
       default: "",
     },
-
     status: {
       type: String,
-      default: "",
+      default: "Under Review",
     },
     userId: {
       type: String,
@@ -64,4 +63,15 @@ function validateUpdateScrap(body) {
   return schema.validate(body);
 }
 
-module.exports = { Scrap, validateAddScrap, validateUpdateScrap };
+function validateScrapStatus(body) {
+  let schema = Joi.object({
+    status: Joi.string().required(),
+  });
+  return schema.validate(body);
+}
+module.exports = {
+  Scrap,
+  validateAddScrap,
+  validateUpdateScrap,
+  validateScrapStatus,
+};

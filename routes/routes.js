@@ -76,6 +76,14 @@ router.delete(
   verifyScrap,
   scrapController.deleteScrap
 );
+
+//CHANGE STATUS OF SCRAP
+router.put(
+  "/user/change-status/:scrapId",
+  validateToken,
+  verifyScrap,
+  scrapController.changeStatus
+);
 /*******    SCRAP   *******/
 
 /*******    ADMIN   *******/
