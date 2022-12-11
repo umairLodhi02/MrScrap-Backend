@@ -4,6 +4,7 @@ const {
   feedbackController,
   scrapController,
   complaincontroller,
+  adminController,
 } = require("../controllers/index");
 const checkUserInScrap = require("../middleware/checkUserinScrap");
 const { validateToken, verifyScrap } = require("../middleware/index");
@@ -47,9 +48,6 @@ router.delete(
 
 /*******    SCRAP   *******/
 
-//GET SCRAPS
-router.get("/user/getscraps", validateToken, scrapController.getScraps);
-
 //GET SCRAPS BY USER ID
 router.get(
   "/user/getscrapsbyuserid/:userId",
@@ -77,16 +75,23 @@ router.delete(
   scrapController.deleteScrap
 );
 
-//CHANGE STATUS OF SCRAP
-router.put(
-  "/user/change-status/:scrapId",
-  validateToken,
-  verifyScrap,
-  scrapController.changeStatus
-);
 /*******    SCRAP   *******/
 
 /*******    ADMIN   *******/
+
+//GET SCRAPS
+router.get("/admin/getscraps", validateToken, adminController.getScraps);
+router.get("/admin/getusers", validateToken, adminController.getUsers);
+router.get("/admin/get-complains", validateToken, adminController.getComplains);
+router.get("/admin/get-feedbacks", validateToken, adminController.getFeedbacks);
+
+//CHANGE STATUS OF SCRAP
+router.put(
+  "/admin/change-status/:scrapId",
+  validateToken,
+  verifyScrap,
+  adminController.changeStatus
+);
 /*******    ADMIN   ******/
 
 module.exports = router;

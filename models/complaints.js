@@ -1,20 +1,23 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
-const complainSchema = new mongoose.Schema({
-  subject: {
-    type: String,
-    default: "",
+const complainSchema = new mongoose.Schema(
+  {
+    subject: {
+      type: String,
+      default: "",
+    },
+    description: {
+      type: String,
+      default: "",
+    },
+    userId: {
+      type: String,
+      default: "",
+    },
   },
-  description: {
-    type: String,
-    default: "",
-  },
-  userId: {
-    type: String,
-    default: "",
-  },
-});
+  { timestamps: true }
+);
 
 const Complain = mongoose.model("Complains", complainSchema);
 
